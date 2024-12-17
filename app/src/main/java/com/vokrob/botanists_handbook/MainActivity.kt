@@ -11,13 +11,17 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.vokrob.botanists_handbook.ui.theme.Botanists_HandbookTheme
 import com.vokrob.botanists_handbook.ui_components.DrawerMenu
 import com.vokrob.botanists_handbook.ui_components.MainTopBar
+import com.vokrob.botanists_handbook.utils.DrawerEvents
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
+
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +40,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val scaffoldState = rememberScaffoldState()
+            val coroutineScope = rememberCoroutineScope()
             val topBarTitle = remember { mutableStateOf("Грибы") }
 
             Botanists_HandbookTheme {
@@ -47,7 +52,16 @@ class MainActivity : ComponentActivity() {
                             scaffoldState
                         )
                     },
-                    drawerContent = { DrawerMenu() }
+                    drawerContent = {
+                        DrawerMenu() { event ->
+                            when (event) {
+                                is DrawerEvents.OnItemClick -> {
+                                    topBarTitle.value = event.title
+                                }
+                            }
+                            coroutineScope.launch { scaffoldState.drawerState.close() }
+                        }
+                    }
                 ) { }
             }
         }
