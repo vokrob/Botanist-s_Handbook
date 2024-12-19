@@ -9,28 +9,28 @@
     </string-array>
 
     <string-array name="mushrooms">
-        <item>Лисичка|lsichka.png</item>
-        <item>Мухомор|muhamor.png</item>
+        <item>Лисичка|lsichka.png|lsichka.html</item>
+        <item>Мухомор|muhamor.png|muhamor.html</item>
     </string-array>
 
     <string-array name="medicinal_herbs">
-        <item>Ромашка|romashka.png</item>
-        <item>Крапива|krapiva.png</item>
+        <item>Ромашка|romashka.png|romashka.html</item>
+        <item>Крапива|krapiva.png|krapiva.html</item>
     </string-array>
 
     <string-array name="trees">
-        <item>Тополь|topol.png</item>
-        <item>Дуб|dub.png</item>
+        <item>Тополь|topol.png|topol.html</item>
+        <item>Дуб|dub.png|dub.html</item>
     </string-array>
 
     <string-array name="fruits">
-        <item>Апельсин|apelsin.png</item>
-        <item>Яблоко|yabloco.png</item>
+        <item>Апельсин|apelsin.png|apelsin.html</item>
+        <item>Яблоко|yabloco.png|yabloco.html</item>
     </string-array>
 
     <string-array name="vegetables">
-        <item>Капуста|kapusta.png</item>
-        <item>Свекла|svekla.png</item>
+        <item>Капуста|kapusta.png|kapusta.html</item>
+        <item>Свёкла|svekla.png|svekla.html</item>
     </string-array>
 </resources>
 
