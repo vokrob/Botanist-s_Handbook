@@ -16,7 +16,9 @@ import com.vokrob.botanists_handbook.ui_components.InfoScreen
 import com.vokrob.botanists_handbook.ui_components.MainScreen
 import com.vokrob.botanists_handbook.utils.ListItem
 import com.vokrob.botanists_handbook.utils.Routes
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +45,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = Routes.MAIN_SCREEN
                 ) {
                     composable(Routes.MAIN_SCREEN) {
-                        MainScreen(context = this@MainActivity) { listItem ->
+                        MainScreen { listItem ->
                             item = listItem
                             navController.navigate(Routes.INFO_SCREEN)
                         }
