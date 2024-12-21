@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -26,9 +27,12 @@ fun MainScreen(
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
     val mainList = mainViewModel.mainList
-    val topBarTitle = remember { mutableStateOf("Грибы") }
+    val topBarTitle = remember { mutableStateOf(mainViewModel.getCurrentCategory()) }
 
-    mainViewModel.getAllItemsByCategory(topBarTitle.value)
+    LaunchedEffect(Unit) {
+        if (topBarTitle.value == "Избранное") mainViewModel.getFavorites()
+        else mainViewModel.getAllItemsByCategory(topBarTitle.value)
+    }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -36,10 +40,13 @@ fun MainScreen(
             MainTopBar(
                 title = topBarTitle.value,
                 scaffoldState
-            )
+            ) {
+                topBarTitle.value = "Избранное"
+                mainViewModel.getFavorites()
+            }
         },
         drawerContent = {
-            DrawerMenu() { event ->
+            DrawerMenu { event ->
                 when (event) {
                     is DrawerEvents.OnItemClick -> {
                         topBarTitle.value = event.title
@@ -59,7 +66,6 @@ fun MainScreen(
         }
     }
 }
-
 
 
 

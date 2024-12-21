@@ -14,14 +14,20 @@ import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.launch
 
 @Composable
-fun MainTopBar(title: String, scaffoldState: ScaffoldState) {
+fun MainTopBar(
+    title: String,
+    scaffoldState: ScaffoldState,
+    onFavClick: () -> Unit
+) {
     val coroutine = rememberCoroutineScope()
 
     TopAppBar(
         title = { Text(text = title) },
         backgroundColor = Color.White,
         navigationIcon = {
-            IconButton(onClick = { coroutine.launch { scaffoldState.drawerState.open() } }) {
+            IconButton(
+                onClick = { coroutine.launch { scaffoldState.drawerState.open() } }
+            ) {
                 Icon(
                     imageVector = Icons.Default.Menu,
                     contentDescription = "Menu"
@@ -29,7 +35,9 @@ fun MainTopBar(title: String, scaffoldState: ScaffoldState) {
             }
         },
         actions = {
-            IconButton(onClick = { }) {
+            IconButton(
+                onClick = { onFavClick() }
+            ) {
                 Icon(
                     imageVector = Icons.Default.Favorite,
                     contentDescription = "Favorite"
